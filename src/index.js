@@ -24,7 +24,7 @@ function drawPlayer(img,sX, sY, sW, sH, dX, dY, dW, dH) {
 function animate() {
     ctx.clearRect(0,0, canvas.clientWidth, canvas.height);
     ctx.drawImage(background,0,0,800,600);
-    drawPlayer(playerPict,0,0,player.width, player.height, player.x,player.y,player.width, player.height);
+    drawPlayer(playerPict,player.width * player.frameX, player.height*player.frameY,player.width, player.height, player.x,player.y,player.width, player.height);
     player.movePlayer();
     requestAnimationFrame(animate);
 }
