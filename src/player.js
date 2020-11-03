@@ -16,6 +16,7 @@ export default class Player {
             this.y -= this.speed;
             this.frameY = 3;
             this.moving = true;
+            // console.log(window.event.clientX)
         }
         if (this.keys[83] && this.y<500){
             this.y += this.speed;

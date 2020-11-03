@@ -1,8 +1,9 @@
-import Player from"./player.js"
+import Player from"./player"
+import Shoot from "./shoot"
 
 const canvas = document.getElementById('game');
 const ctx = canvas.getContext("2d");
-
+export default ctx;
 // ctx.beginPath();
 // ctx.arc(100, 75, 50, 0, 2 * Math.PI);
 // ctx.stroke();
@@ -21,26 +22,6 @@ function drawPlayer(img,sX, sY, sW, sH, dX, dY, dW, dH) {
 }
 
 
-// function animate() {
-//     ctx.clearRect(0,0, canvas.clientWidth, canvas.height);
-//     ctx.drawImage(background,0,0,800,600);
-//     drawPlayer(playerPict,player.width * player.frameX, player.height*player.frameY,player.width, player.height, player.x,player.y,player.width, player.height);
-//     player.movePlayer();
-//     player.handlePlayerFrame();
-//     requestAnimationFrame(animate);
-// }
-
-// animate();
-
-// setInterval(function(){
-//     ctx.clearRect(0,0, canvas.clientWidth, canvas.height);
-//     ctx.drawImage(background,0,0,800,600);
-//     drawPlayer(playerPict,player.width * player.frameX, player.height*player.frameY,player.width, player.height, player.x,player.y,player.width, player.height);
-//     player.movePlayer();
-//     player.handlePlayerFrame();
-//     requestAnimationFrame(animate);
-// },50);
-
 window.addEventListener("keydown", function (e) {
     if(e.keyCode === 65 || e.keyCode === 68 || e.keyCode === 83 || e.keyCode === 87){
         player.keys[e.keyCode] = true;
@@ -56,7 +37,18 @@ window.addEventListener("keyup", function (e) {
     }
 })
 
-let fps, fpsInterval, startTime, now, then, elapsed;
+const shoots = []
+window.addEventListener('click', function(e){
+    const angle = Math.atan2(e.clientY - canvas.height / 2, e.clientX - canvas.width / 2)
+    const velocity = {
+        x: Math.cos(angle),
+        y: Math.sin(angle)
+    }
+    shoots.push(new Shoot(player.x+12,player.y+40, velocity))
+});
+
+let fpsInterval, startTime, now, then, elapsed;
+
 
 function startAnimating(fps){
     fpsInterval = 1000/fps;
@@ -67,6 +59,7 @@ function startAnimating(fps){
 
 function animate(){
     requestAnimationFrame(animate);
+    // ctx.clearRect(0,0, canvas.clientWidth, canvas.height);
     now = Date.now();
     elapsed = now - then;
     if(elapsed > fpsInterval){
@@ -77,6 +70,8 @@ function animate(){
         player.movePlayer();
         player.handlePlayerFrame();
     }
-    
+    shoots.forEach((shoot)=>{
+        shoot.update(ctx)
+    })
 }
 startAnimating(30)
