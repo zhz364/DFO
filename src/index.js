@@ -7,7 +7,7 @@ const ctx = canvas.getContext("2d");
 // ctx.arc(100, 75, 50, 0, 2 * Math.PI);
 // ctx.stroke();
 
-const player = new Player(200,200,"./images/player1.png")
+const player = new Player(200,200)
 const playerPict = new Image();
 playerPict.src = "./src/images/player1.png";
 const background = new Image();
@@ -24,15 +24,18 @@ function drawPlayer(img,sX, sY, sW, sH, dX, dY, dW, dH) {
 function animate() {
     ctx.clearRect(0,0, canvas.clientWidth, canvas.height);
     ctx.drawImage(background,0,0,800,600);
-    drawPlayer(playerPict,0,0,player.width, player.height,0,0,player.width, player.height);
+    drawPlayer(playerPict,0,0,player.width, player.height, player.x,player.y,player.width, player.height);
+    player.movePlayer();
     requestAnimationFrame(animate);
 }
 
 animate();
 window.addEventListener("keydown", function (e) {
-    
+    player.keys[e.keyCode] = true;
+    // console.log(player.keys)
 })
 
 window.addEventListener("keyup", function (e) {
-    
+    delete player.keys[e.keyCode];
 })
+
