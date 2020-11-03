@@ -6,6 +6,6 @@ body {
 }
 canvas {
     /* background: black; */
-    height:640px;
-    width: 800px;
+    height:inherit;
+    width: inherit;
 }
