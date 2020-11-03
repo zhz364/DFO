@@ -1,5 +1,5 @@
 export default class Player {
-    constructor(x,y){
+    constructor(x,y,image){
         this.x = x;
         this.y = y;
         this.width = 34;
@@ -8,7 +8,15 @@ export default class Player {
         this.frameY = 0;
         this.speed = 9;
         this.moving = false;
-        
+        this.image = image
+        this.keys = []
+        this.playerPic = image;
     }
+
+    // movePlayer(){
+    //     if(keys[])
+    // }
+
 }
+
 
