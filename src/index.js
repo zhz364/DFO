@@ -21,21 +21,62 @@ function drawPlayer(img,sX, sY, sW, sH, dX, dY, dW, dH) {
 }
 
 
-function animate() {
-    ctx.clearRect(0,0, canvas.clientWidth, canvas.height);
-    ctx.drawImage(background,0,0,800,600);
-    drawPlayer(playerPict,player.width * player.frameX, player.height*player.frameY,player.width, player.height, player.x,player.y,player.width, player.height);
-    player.movePlayer();
-    requestAnimationFrame(animate);
-}
+// function animate() {
+//     ctx.clearRect(0,0, canvas.clientWidth, canvas.height);
+//     ctx.drawImage(background,0,0,800,600);
+//     drawPlayer(playerPict,player.width * player.frameX, player.height*player.frameY,player.width, player.height, player.x,player.y,player.width, player.height);
+//     player.movePlayer();
+//     player.handlePlayerFrame();
+//     requestAnimationFrame(animate);
+// }
 
-animate();
+// animate();
+
+// setInterval(function(){
+//     ctx.clearRect(0,0, canvas.clientWidth, canvas.height);
+//     ctx.drawImage(background,0,0,800,600);
+//     drawPlayer(playerPict,player.width * player.frameX, player.height*player.frameY,player.width, player.height, player.x,player.y,player.width, player.height);
+//     player.movePlayer();
+//     player.handlePlayerFrame();
+//     requestAnimationFrame(animate);
+// },50);
+
 window.addEventListener("keydown", function (e) {
-    player.keys[e.keyCode] = true;
+    if(e.keyCode === 65 || e.keyCode === 68 || e.keyCode === 83 || e.keyCode === 87){
+        player.keys[e.keyCode] = true;
+        player.moving = true;
+    }
     // console.log(player.keys)
 })
 
 window.addEventListener("keyup", function (e) {
-    delete player.keys[e.keyCode];
+    if(e.keyCode === 65 || e.keyCode === 68 || e.keyCode === 83 || e.keyCode === 87){
+        delete player.keys[e.keyCode];
+        player.moving = false;
+    }
 })
 
+let fps, fpsInterval, startTime, now, then, elapsed;
+
+function startAnimating(fps){
+    fpsInterval = 1000/fps;
+    then = Date.now();
+    startTime = then;
+    animate()
+}
+
+function animate(){
+    requestAnimationFrame(animate);
+    now = Date.now();
+    elapsed = now - then;
+    if(elapsed > fpsInterval){
+        then = now - (elapsed % fpsInterval);
+        ctx.clearRect(0,0, canvas.clientWidth, canvas.height);
+        ctx.drawImage(background,0,0,800,600);
+        drawPlayer(playerPict,player.width * player.frameX, player.height*player.frameY,player.width, player.height, player.x,player.y,player.width, player.height);
+        player.movePlayer();
+        player.handlePlayerFrame();
+    }
+    
+}
+startAnimating(30)
