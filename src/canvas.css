@@ -5,7 +5,7 @@ body {
     align-items: center;
 }
 canvas {
-    /* background: black; */
+    background: black;
     height:inherit;
     width: inherit;
 }
