@@ -6,14 +6,14 @@ export default class Shoot{
         this.radius = 10;
         this.color = "red";
         this.velocity = velocity
+        this.width = 20;
+        this.height = 20;
         this.draw = this.draw.bind(this)
     }
     draw(ctx){
-        ctx.beginPath()
-        ctx.arc(this.x,this.y,this.radius,0,Math.PI*2,false)
-        ctx.fillStyle = this.color;
-        ctx.fill()
-        // ctx.stroke();
+        const fireball = new Image();
+        fireball.src = "./src/images/fireball1.png";
+        ctx.drawImage(fireball,this.x,this.y,this.width,this.height);
     }
 
     update(ctx){
