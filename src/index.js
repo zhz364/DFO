@@ -1,8 +1,11 @@
-import Player from"./player"
-import Shoot from "./shoot"
+import Monster from "./monster";
+import Player from"./player";
+import Shoot from "./shoot";
 
 const canvas = document.getElementById('game');
 const ctx = canvas.getContext("2d");
+console.log(canvas.height);
+
 export default ctx;
 // ctx.beginPath();
 // ctx.arc(100, 75, 50, 0, 2 * Math.PI);
@@ -38,13 +41,18 @@ window.addEventListener("keyup", function (e) {
 })
 
 const shoots = []
+const monsters = []
+
 window.addEventListener('click', function(e){
-    const angle = Math.atan2(e.clientY - canvas.height / 2, e.clientX - canvas.width / 2)
+    const angle = Math.atan2(e.clientY - player.y, e.clientX - player.x)
+    console.log(angle)
     const velocity = {
         x: Math.cos(angle),
         y: Math.sin(angle)
     }
     shoots.push(new Shoot(player.x+12,player.y+40, velocity))
+    // console.log(e.clientX)
+    // console.log(e.clientY)
 });
 
 let fpsInterval, startTime, now, then, elapsed;
@@ -73,5 +81,14 @@ function animate(){
     shoots.forEach((shoot)=>{
         shoot.update(ctx)
     })
+    monsters.forEach((monster)=>{
+        monster.update(ctx)
+    })
+}
+function spawnMonsters(){
+    setInterval(()=>{
+        monsters.push(new Monster(100,100,{x:1,y:1}))
+    },1000)
 }
 startAnimating(30)
+spawnMonsters()
