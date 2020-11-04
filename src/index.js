@@ -95,8 +95,22 @@ function animate(){
 }
 function spawnMonsters(){
     setInterval(()=>{
-        monsters.push(new Monster(100,100,{x:1,y:1}))
-    },1000)
+        let x;
+        let y;
+        if (Math.random() < 0.5){
+            x = Math.random() < 0.5 ? 0-30 : canvas.width + 30;
+            y = Math.random() * canvas.height;
+        }else{
+            x = Math.random() * canvas.width;
+            y = Math.random() < 0.5 ? 0-30 : canvas.height + 30;
+        }
+        const angle = Math.atan2(player.y - y, player.x - x)
+        const velocity = {
+        x: Math.cos(angle),
+        y: Math.sin(angle)
+    }
+        monsters.push(new Monster(x,y,velocity))
+    },3000)
 }
 startAnimating(30)
 spawnMonsters()
