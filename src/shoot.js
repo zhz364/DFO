@@ -3,7 +3,7 @@ export default class Shoot{
     constructor(x,y,velocity){
         this.x = x;
         this.y = y;
-        this.radius = 5;
+        this.radius = 10;
         this.color = "red";
         this.velocity = velocity
         this.draw = this.draw.bind(this)

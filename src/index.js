@@ -92,12 +92,13 @@ function animate(){
         shoot.update(ctx)
     })
     monsters.forEach((monster,idx1)=>{
-        monster.update(ctx);
+        // monster.update(ctx);
+        monster.updateMosterLocation(player,ctx)
         const monsterToPlayer = Math.hypot(player.x - monster.x, player.y - monster.y);
         //end game
-    //     if(monsterToPlayer - monster.radius - player.size< 1){
-    //         cancelAnimationFrame(animationId)
-    //    }
+        if(monsterToPlayer - monster.radius - player.size< 1){
+            cancelAnimationFrame(animationId)
+       }
         shoots.forEach((shoot,idx2)=>{
            const dist =  Math.hypot(shoot.x - monster.x,shoot.y - monster.y)
            if(dist - monster.radius - shoot.radius< 1){
@@ -128,5 +129,7 @@ function spawnMonsters(){
         monsters.push(new Monster(x,y,velocity))
     },3000)
 }
+
+
 startAnimating(30)
 spawnMonsters()
