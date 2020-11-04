@@ -57,10 +57,10 @@ window.addEventListener('click', function(e){
     const angle = Math.atan2(pos.y - player.y, pos.x - player.x)
     console.log(angle)
     const velocity = {
-        x: Math.cos(angle),
-        y: Math.sin(angle)
+        x: Math.cos(angle) * 3,
+        y: Math.sin(angle) * 3
     }
-    shoots.push(new Shoot(player.x+12,player.y+40, velocity))
+    shoots.push(new Shoot(player.x,player.y, velocity))
 });
 
 let fpsInterval, startTime, now, then, elapsed;
