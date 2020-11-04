@@ -7,8 +7,14 @@ export default class Monster{
         this.velocity = velocity
         this.width = 33;
         this.height = 32;
+        this.frameX = 0;
+        this.frameY = 0;
+        this.speed = 1;
+        
         this.draw = this.draw.bind(this);
         this.update = this.update.bind(this);
+        this.updateMosterLocation = this.updateMosterLocation.bind(this);
+        this.handleMonsterFrame = this.handleMonsterFrame.bind(this);
     }
     draw(ctx){
         // ctx.beginPath()
@@ -17,7 +23,8 @@ export default class Monster{
         // ctx.fill();
         const monster = new Image();
         monster.src = "./src/images/monster1.png";
-        ctx.drawImage(monster,0, 0,this.width, this.height, this.x, this.y,this.width, this.height);
+        // ctx.drawImage(monster,0, 0,this.width, this.height, this.x, this.y,this.width, this.height);
+        ctx.drawImage(monster,this.width * this.frameX, this.height* this.frameY, this.width, this.height, this.x,this.y,this.width, this.height);
         // ctx.drawImage(monster,this.width, this.height);
 
     }
@@ -35,6 +42,17 @@ export default class Monster{
             y: Math.sin(angle)
         }
         this.velocity = velocities;
+        this.frameX = player.frameX;
+        this.frameY = player.frameY;
+        this.handleMonsterFrame();
         this.update(ctx);
     }
+    handleMonsterFrame(){
+        if (this.frameX < 3){
+            this.frameX++;
+        }else{
+            this.frameX = 0;
+        }
+    }
+
 }
