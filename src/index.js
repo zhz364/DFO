@@ -107,6 +107,11 @@ function animate(){
                     shoots.splice(idx2,1);
                 },0)
            }
+           if(shoot.x < 100 || shoot.y < 150 || shoot.x > 700 || shoot.y > 500){
+                setTimeout(()=>{
+                    shoots.splice(idx2,1);
+                },0)
+           }
         })
     })
 }

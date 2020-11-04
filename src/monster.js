@@ -23,10 +23,7 @@ export default class Monster{
         // ctx.fill();
         const monster = new Image();
         monster.src = "./src/images/monster1.png";
-        // ctx.drawImage(monster,0, 0,this.width, this.height, this.x, this.y,this.width, this.height);
         ctx.drawImage(monster,this.width * this.frameX, this.height* this.frameY, this.width, this.height, this.x,this.y,this.width, this.height);
-        // ctx.drawImage(monster,this.width, this.height);
-
     }
 
     update(ctx){
