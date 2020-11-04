@@ -43,16 +43,24 @@ window.addEventListener("keyup", function (e) {
 const shoots = []
 const monsters = []
 
+function getMousePos(canvas, e) {
+    var rect = canvas.getBoundingClientRect();
+    let scaleX = canvas.width / rect.width;   
+    let scaleY = canvas.height / rect.height;
+    return {
+      x: (e.clientX - rect.left) * scaleX,
+      y: (e.clientY - rect.top) * scaleY
+    };
+}
 window.addEventListener('click', function(e){
-    const angle = Math.atan2(e.clientY - player.y, e.clientX - player.x)
+    const pos = getMousePos(canvas, e)
+    const angle = Math.atan2(pos.y - player.y, pos.x - player.x)
     console.log(angle)
     const velocity = {
         x: Math.cos(angle),
         y: Math.sin(angle)
     }
     shoots.push(new Shoot(player.x+12,player.y+40, velocity))
-    // console.log(e.clientX)
-    // console.log(e.clientY)
 });
 
 let fpsInterval, startTime, now, then, elapsed;
