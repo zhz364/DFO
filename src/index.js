@@ -89,8 +89,17 @@ function animate(){
     shoots.forEach((shoot)=>{
         shoot.update(ctx)
     })
-    monsters.forEach((monster)=>{
+    monsters.forEach((monster,idx1)=>{
         monster.update(ctx)
+        shoots.forEach((shoot,idx2)=>{
+           const dist =  Math.hypot(shoot.x - monster.x,shoot.y - monster.y)
+           if(dist - monster.radius - shoot.radius< 1){
+                setTimeout(()=>{
+                    monsters.splice(idx1,1);
+                    shoots.splice(idx2,1);
+                },0)
+           }
+        })
     })
 }
 function spawnMonsters(){
