@@ -8,7 +8,8 @@ export default class Player {
         this.frameY = 0;
         this.speed = 7;
         this.moving = false;
-        this.keys = []
+        this.keys = [];
+        this.size = 9;
     }
 
     movePlayer(){

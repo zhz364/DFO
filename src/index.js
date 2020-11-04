@@ -73,8 +73,9 @@ function startAnimating(fps){
     animate()
 }
 
+let animationId;
 function animate(){
-    requestAnimationFrame(animate);
+    animationId = requestAnimationFrame(animate);
     // ctx.clearRect(0,0, canvas.clientWidth, canvas.height);
     now = Date.now();
     elapsed = now - then;
@@ -90,7 +91,12 @@ function animate(){
         shoot.update(ctx)
     })
     monsters.forEach((monster,idx1)=>{
-        monster.update(ctx)
+        monster.update(ctx);
+        const monsterToPlayer = Math.hypot(player.x - monster.x, player.y - monster.y);
+        //end gae
+        if(monsterToPlayer - monster.radius - player.size< 1){
+            cancelAnimationFrame(animationId)
+       }
         shoots.forEach((shoot,idx2)=>{
            const dist =  Math.hypot(shoot.x - monster.x,shoot.y - monster.y)
            if(dist - monster.radius - shoot.radius< 1){
