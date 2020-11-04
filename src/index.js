@@ -87,16 +87,17 @@ function animate(){
         player.movePlayer();
         player.handlePlayerFrame();
     }
+
     shoots.forEach((shoot)=>{
         shoot.update(ctx)
     })
     monsters.forEach((monster,idx1)=>{
         monster.update(ctx);
         const monsterToPlayer = Math.hypot(player.x - monster.x, player.y - monster.y);
-        //end gae
-        if(monsterToPlayer - monster.radius - player.size< 1){
-            cancelAnimationFrame(animationId)
-       }
+        //end game
+    //     if(monsterToPlayer - monster.radius - player.size< 1){
+    //         cancelAnimationFrame(animationId)
+    //    }
         shoots.forEach((shoot,idx2)=>{
            const dist =  Math.hypot(shoot.x - monster.x,shoot.y - monster.y)
            if(dist - monster.radius - shoot.radius< 1){
@@ -113,11 +114,11 @@ function spawnMonsters(){
         let x;
         let y;
         if (Math.random() < 0.5){
-            x = Math.random() < 0.5 ? 0-30 : canvas.width + 30;
-            y = Math.random() * canvas.height;
+            x = Math.random() < 0.5 ? 150 : canvas.width - 150;
+            y = Math.random() < 0.5 ? 100 : canvas.height - 150;
         }else{
-            x = Math.random() * canvas.width;
-            y = Math.random() < 0.5 ? 0-30 : canvas.height + 30;
+            x = Math.random() < 0.5 ? 150 : canvas.width - 150;
+            y = Math.random() < 0.5 ? 150 : canvas.height - 100;
         }
         const angle = Math.atan2(player.y - y, player.x - x)
         const velocity = {

@@ -5,8 +5,8 @@ export default class Monster{
         this.radius = 15;
         this.color = "blue";
         this.velocity = velocity
-        this.width = 34;
-        this.height = 34;
+        this.width = 33;
+        this.height = 32;
         this.draw = this.draw.bind(this)
     }
     draw(ctx){
