@@ -43,7 +43,32 @@ export default class Monster{
         }
         this.velocity = velocities;
         this.frameX = player.frameX;
-        this.frameY = player.frameY;
+        if(player.frameY === 0){
+            if(player.y < this.y){
+                this.frameY = 3;
+            }else{
+                this.frameY = 0;
+            }
+        }else if(player.frameY === 1){
+            if(player.x < this.x){
+                this.frameY = 1;
+            }else{
+                this.frameY = 2;
+            }
+        }else if(player.frameY === 2){
+            if(player.x < this.x){
+                this.frameY = 1;
+            }else{
+                this.frameY = 2;
+            }
+        }else if(player.frameY === 3){
+            if(player.y < this.y){
+                this.frameY = 3;
+            }else{
+                this.frameY = 0;
+            }
+        }
+        // this.frameY = player.frameY;
         this.handleMonsterFrame();
         this.update(ctx);
     }

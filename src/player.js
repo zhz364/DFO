@@ -17,7 +17,7 @@ export default class Player {
             this.y -= this.speed;
             this.frameY = 3;
             this.moving = true;
-            // console.log(window.event.clientX)
+            
         }
         if (this.keys[83] && this.y<500){
             this.y += this.speed;
@@ -28,6 +28,7 @@ export default class Player {
             this.x -= this.speed;
             this.frameY = 1;
             this.moving = true;
+            // console.log(this.frameY)
         }
         if (this.keys[68]&& this.x<650){
             this.x += this.speed;
