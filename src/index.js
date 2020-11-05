@@ -78,8 +78,12 @@ window.addEventListener('click', function(e){
     const velocity = {
         x: Math.cos(angle) * 3,
         y: Math.sin(angle) * 3
+    } 
+    if(shoots.length < 5){
+        const fireball = new Audio("./src/audio/fireball.mp3")
+        fireball.play();
+        shoots.push(new Shoot(player.x +10,player.y+20, velocity))
     }
-    shoots.push(new Shoot(player.x +10,player.y+20, velocity))
 });
 
 // let fpsInterval, startTime, now, then, elapsed;
