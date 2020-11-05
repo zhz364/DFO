@@ -11,6 +11,7 @@ const gameOverModal = document.getElementById("gameOverModal");
 const gameStartModal = document.getElementById("start-modal")
 const finalScore = document.getElementById("game-over-score");
 const startGame = document.getElementById("start");
+const pauseBGM = document.getElementById("pause-bgm");
 const bgm = new Audio("https://hicamp-seed.s3-us-west-1.amazonaws.com/Yoann13.flac");
 export default ctx;
 // ctx.beginPath();
@@ -27,6 +28,7 @@ let monsters = []
 let fpsInterval, startTime, now, then, elapsed;
 let animationId;
 let score = 0;
+let music;
 
 function initGame() {
     player = new Player(200,200)
@@ -38,6 +40,7 @@ function initGame() {
     monsters = []
     score = 0
     scoreBox.innerHTML = score;
+    music = true;
 }
 
 // ctx.onload = function() {
@@ -72,7 +75,7 @@ function getMousePos(canvas, e) {
       y: (e.clientY - rect.top) * scaleY
     };
 }
-window.addEventListener('click', function(e){
+canvas.addEventListener('click', function(e){
     const pos = getMousePos(canvas, e)
     const angle = Math.atan2(pos.y - player.y, pos.x - player.x)
     // console.log(angle)
@@ -182,6 +185,17 @@ startGame.addEventListener("click",(e)=>{
     spawnMonsters();
     gameStartModal.style.display = "none";
     bgm.play();
+})
+
+pauseBGM.addEventListener('click',(e)=>{
+    e.preventDefault();
+    if(music){
+        bgm.pause();
+        music = false;
+    }else{
+        bgm.play();
+        music=true;
+    }
 })
 // initGame()
 // startAnimating(30)
