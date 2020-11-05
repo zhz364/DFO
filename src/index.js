@@ -191,11 +191,13 @@ startGame.addEventListener("click",(e)=>{
 pauseBGM.addEventListener('click',(e)=>{
     e.preventDefault();
     if(music){
+        pauseBGM.innerHTML="ON"
         bgm.pause();
         music = false;
     }else{
         bgm.play();
         music=true;
+        pauseBGM.innerHTML="OFF"
     }
 })
 // initGame()
