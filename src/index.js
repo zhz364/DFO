@@ -12,7 +12,7 @@ const gameStartModal = document.getElementById("start-modal")
 const finalScore = document.getElementById("game-over-score");
 const startGame = document.getElementById("start");
 const pauseBGM = document.getElementById("pause-bgm");
-const bgm = new Audio("https://hicamp-seed.s3-us-west-1.amazonaws.com/Yoann13.flac");
+let bgm = new Audio("https://hicamp-seed.s3-us-west-1.amazonaws.com/Yoann13.flac");
 export default ctx;
 // ctx.beginPath();
 // ctx.arc(100, 75, 50, 0, 2 * Math.PI);
@@ -172,6 +172,7 @@ function spawnMonsters(){
 }
 
 tryAgainBtn.addEventListener("click",()=>{
+    bgm = new Audio("https://hicamp-seed.s3-us-west-1.amazonaws.com/Yoann13.flac");
     bgm.play();
     initGame()
     startAnimating(30);
