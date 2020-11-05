@@ -8,6 +8,7 @@ const ctx = canvas.getContext("2d");
 const scoreBox = document.getElementById("score");
 const tryAgainBtn = document.getElementById("try_again_btn");
 const gameOverModal = document.getElementById("gameOverModal");
+const finalScore = document.getElementById("game-over-score");
 export default ctx;
 // ctx.beginPath();
 // ctx.arc(100, 75, 50, 0, 2 * Math.PI);
@@ -101,7 +102,8 @@ function animate(){
         const monsterToPlayer = Math.hypot(player.x - monster.x, player.y - monster.y);
         //end game
         if(monsterToPlayer - monster.radius - player.size< 1){
-            cancelAnimationFrame(animationId)
+            cancelAnimationFrame(animationId);
+        gameOverModal.style.display = "flex"
        }
         shoots.forEach((shoot,idx2)=>{
            const dist =  Math.hypot(shoot.x - monster.x,shoot.y - monster.y)
@@ -111,6 +113,7 @@ function animate(){
                     shoots.splice(idx2,1);
                 },0)
                 score +=100;
+                finalScore.innerHTML = score;
                 scoreBox.innerHTML = score; 
            }
            if(shoot.x < 100 || shoot.y < 150 || shoot.x > 700 || shoot.y > 500){
@@ -144,7 +147,7 @@ function spawnMonsters(){
 tryAgainBtn.addEventListener("click",()=>{
     startAnimating(30);
     spawnMonsters();
-    gameOverModal.style.display = "none"
+    gameOverModal.style.display = "none";
 })
 startAnimating(30)
 spawnMonsters()
