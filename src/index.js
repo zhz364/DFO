@@ -14,11 +14,28 @@ export default ctx;
 // ctx.arc(100, 75, 50, 0, 2 * Math.PI);
 // ctx.stroke();
 
-const player = new Player(200,200)
-const playerPict = new Image();
+let player = new Player(200,200)
+let playerPict = new Image();
 playerPict.src = "./src/images/player1.png";
-const background = new Image();
+let background = new Image();
 background.src = "./src/images/background.jpg"
+let shoots = []
+let monsters = []
+let fpsInterval, startTime, now, then, elapsed;
+let animationId;
+let score = 0;
+
+function initGame() {
+    player = new Player(200,200)
+    playerPict = new Image();
+    playerPict.src = "./src/images/player1.png";
+    background = new Image();
+    background.src = "./src/images/background.jpg"
+    shoots = []
+    monsters = []
+    score = 0
+    scoreBox.innerHTML = score;
+}
 
 // ctx.onload = function() {
 //     ctx.drawImage(playerPict,100,10,player.width,player.height);
@@ -43,9 +60,6 @@ window.addEventListener("keyup", function (e) {
     }
 })
 
-const shoots = []
-const monsters = []
-
 function getMousePos(canvas, e) {
     var rect = canvas.getBoundingClientRect();
     let scaleX = canvas.width / rect.width;   
@@ -66,7 +80,7 @@ window.addEventListener('click', function(e){
     shoots.push(new Shoot(player.x +10,player.y+20, velocity))
 });
 
-let fpsInterval, startTime, now, then, elapsed;
+// let fpsInterval, startTime, now, then, elapsed;
 
 
 function startAnimating(fps){
@@ -76,9 +90,6 @@ function startAnimating(fps){
     animate()
 }
 
-let animationId;
-let score = 0;
-scoreBox.innerHTML = score;
 function animate(){
     animationId = requestAnimationFrame(animate);
     // ctx.clearRect(0,0, canvas.clientWidth, canvas.height);
@@ -103,7 +114,8 @@ function animate(){
         //end game
         if(monsterToPlayer - monster.radius - player.size< 1){
             cancelAnimationFrame(animationId);
-        gameOverModal.style.display = "flex"
+            finalScore.innerHTML = score;
+            gameOverModal.style.display = "flex"
        }
         shoots.forEach((shoot,idx2)=>{
            const dist =  Math.hypot(shoot.x - monster.x,shoot.y - monster.y)
@@ -113,7 +125,6 @@ function animate(){
                     shoots.splice(idx2,1);
                 },0)
                 score +=100;
-                finalScore.innerHTML = score;
                 scoreBox.innerHTML = score; 
            }
            if(shoot.x < 100 || shoot.y < 150 || shoot.x > 700 || shoot.y > 500){
@@ -145,9 +156,11 @@ function spawnMonsters(){
 }
 
 tryAgainBtn.addEventListener("click",()=>{
+    initGame()
     startAnimating(30);
     spawnMonsters();
     gameOverModal.style.display = "none";
 })
+initGame()
 startAnimating(30)
 spawnMonsters()
