@@ -4,9 +4,10 @@ import Shoot from "./shoot";
 
 const canvas = document.getElementById('game');
 const ctx = canvas.getContext("2d");
-// console.log(canvas.height);
 
-const scoreBox = document.getElementById("score")
+const scoreBox = document.getElementById("score");
+const tryAgainBtn = document.getElementById("try_again_btn");
+const gameOverModal = document.getElementById("gameOverModal");
 export default ctx;
 // ctx.beginPath();
 // ctx.arc(100, 75, 50, 0, 2 * Math.PI);
@@ -140,6 +141,10 @@ function spawnMonsters(){
     },3000)
 }
 
-
+tryAgainBtn.addEventListener("click",()=>{
+    startAnimating(30);
+    spawnMonsters();
+    gameOverModal.style.display = "none"
+})
 startAnimating(30)
 spawnMonsters()
