@@ -3,9 +3,14 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: black;
 }
 canvas {
     background: black;
     height:inherit;
     width: inherit;
+}
+
+h1, div{
+    color: white;
 }

@@ -6,6 +6,7 @@ const canvas = document.getElementById('game');
 const ctx = canvas.getContext("2d");
 console.log(canvas.height);
 
+const scoreBox = document.getElementById("score")
 export default ctx;
 // ctx.beginPath();
 // ctx.arc(100, 75, 50, 0, 2 * Math.PI);
@@ -60,7 +61,7 @@ window.addEventListener('click', function(e){
         x: Math.cos(angle) * 3,
         y: Math.sin(angle) * 3
     }
-    shoots.push(new Shoot(player.x,player.y, velocity))
+    shoots.push(new Shoot(player.x +10,player.y+20, velocity))
 });
 
 let fpsInterval, startTime, now, then, elapsed;
@@ -74,6 +75,8 @@ function startAnimating(fps){
 }
 
 let animationId;
+let score = 0;
+scoreBox.innerHTML = score;
 function animate(){
     animationId = requestAnimationFrame(animate);
     // ctx.clearRect(0,0, canvas.clientWidth, canvas.height);
@@ -106,6 +109,8 @@ function animate(){
                     monsters.splice(idx1,1);
                     shoots.splice(idx2,1);
                 },0)
+                score +=100;
+                scoreBox.innerHTML = score; 
            }
            if(shoot.x < 100 || shoot.y < 150 || shoot.x > 700 || shoot.y > 500){
                 setTimeout(()=>{
