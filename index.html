@@ -18,8 +18,26 @@
     </head>
     <body>
         <div><span>Score:</span><span id="score"></span></div>
-
-        
+        <div id="start-modal" class="start-game-div">
+                 <button id="start">START GAME</button>       
+        </div> 
+        <div class="game-div">
+            <div class="game">
+                <div>
+                    <ul><span>DESCRPTION</span>
+                        <li>Press W move UP</li>
+                        <li>Press A move LEFT</li>
+                        <li>Press S move DOWN</li>
+                        <li>Press D move RIGHT</li>
+                        <li>LEFT CLICK shoot target</li>
+                    </ul>
+                </div> 
+                <canvas id="game" width="800" height="600"></canvas>
+                <div>
+                    <span>INSTRUCTION</span>
+                </div>
+            </div>
+        </div>
         <div class="game-over-div" id="gameOverModal">
             <div class="game-over-infor">
                 <div>
@@ -33,7 +51,7 @@
                 </div>
             </div>
         </div>
-        <canvas id="game" width="800" height="600"></canvas>
+        <!-- <canvas id="game" width="800" height="600"></canvas> -->
         <script src="./dist/main.js"></script>
     </body>
 </html>

@@ -8,7 +8,9 @@ const ctx = canvas.getContext("2d");
 const scoreBox = document.getElementById("score");
 const tryAgainBtn = document.getElementById("try_again_btn");
 const gameOverModal = document.getElementById("gameOverModal");
+const gameStartModal = document.getElementById("start-modal")
 const finalScore = document.getElementById("game-over-score");
+const startGame = document.getElementById("start");
 export default ctx;
 // ctx.beginPath();
 // ctx.arc(100, 75, 50, 0, 2 * Math.PI);
@@ -161,6 +163,12 @@ tryAgainBtn.addEventListener("click",()=>{
     spawnMonsters();
     gameOverModal.style.display = "none";
 })
-initGame()
-startAnimating(30)
-spawnMonsters()
+startGame.addEventListener("click",()=>{
+    initGame()
+    startAnimating(30);
+    spawnMonsters();
+    gameStartModal.style.display = "none";
+})
+// initGame()
+// startAnimating(30)
+// spawnMonsters()
