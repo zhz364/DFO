@@ -11,6 +11,7 @@ const gameOverModal = document.getElementById("gameOverModal");
 const gameStartModal = document.getElementById("start-modal")
 const finalScore = document.getElementById("game-over-score");
 const startGame = document.getElementById("start");
+const bgm = new Audio("https://hicamp-seed.s3-us-west-1.amazonaws.com/Yoann13.flac");
 export default ctx;
 // ctx.beginPath();
 // ctx.arc(100, 75, 50, 0, 2 * Math.PI);
@@ -119,6 +120,10 @@ function animate(){
         const monsterToPlayer = Math.hypot(player.x - monster.x, player.y - monster.y);
         //end game
         if(monsterToPlayer - monster.radius - player.size< 1){
+            const gameover = new Audio("./src/audio/gameover.wav");
+            bgm.pause();
+            gameover.play();
+
             cancelAnimationFrame(animationId);
             finalScore.innerHTML = score;
             gameOverModal.style.display = "flex"
@@ -126,6 +131,8 @@ function animate(){
         shoots.forEach((shoot,idx2)=>{
            const dist =  Math.hypot(shoot.x - monster.x,shoot.y - monster.y)
            if(dist - monster.radius - shoot.radius< 1){
+                const dead = new Audio("./src/audio/dead.mp3");
+                dead.play();
                 setTimeout(()=>{
                     monsters.splice(idx1,1);
                     shoots.splice(idx2,1);
@@ -162,17 +169,18 @@ function spawnMonsters(){
 }
 
 tryAgainBtn.addEventListener("click",()=>{
+    bgm.play();
     initGame()
     startAnimating(30);
     spawnMonsters();
     gameOverModal.style.display = "none";
 })
-startGame.addEventListener("click",()=>{
+startGame.addEventListener("click",(e)=>{
+    e.preventDefault();
     initGame()
     startAnimating(30);
     spawnMonsters();
     gameStartModal.style.display = "none";
-    const bgm = new Audio("https://hicamp-seed.s3-us-west-1.amazonaws.com/Yoann13.flac");
     bgm.play();
 })
 // initGame()
