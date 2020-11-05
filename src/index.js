@@ -4,7 +4,7 @@ import Shoot from "./shoot";
 
 const canvas = document.getElementById('game');
 const ctx = canvas.getContext("2d");
-console.log(canvas.height);
+// console.log(canvas.height);
 
 const scoreBox = document.getElementById("score")
 export default ctx;
@@ -56,7 +56,7 @@ function getMousePos(canvas, e) {
 window.addEventListener('click', function(e){
     const pos = getMousePos(canvas, e)
     const angle = Math.atan2(pos.y - player.y, pos.x - player.x)
-    console.log(angle)
+    // console.log(angle)
     const velocity = {
         x: Math.cos(angle) * 3,
         y: Math.sin(angle) * 3

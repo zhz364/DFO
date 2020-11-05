@@ -14,3 +14,20 @@ canvas {
 h1, div{
     color: white;
 }
+.game-over-div{
+    display: flex;
+    position: fixed;
+    top:40%;
+    left: 40%;
+    border:1px solid red;
+    width: 20em;
+    height: 10em;
+}
+.game-over-infor{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border:1px solid red;
+    width: inherit;
+}
