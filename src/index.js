@@ -172,6 +172,8 @@ startGame.addEventListener("click",()=>{
     startAnimating(30);
     spawnMonsters();
     gameStartModal.style.display = "none";
+    const bgm = new Audio("https://hicamp-seed.s3-us-west-1.amazonaws.com/Yoann13.flac");
+    bgm.play();
 })
 // initGame()
 // startAnimating(30)
