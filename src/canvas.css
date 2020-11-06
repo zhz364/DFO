@@ -24,6 +24,17 @@ canvas {
     margin-top: -2%;
 
 }
+.descrption{
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    flex-direction: column;
+    /* border: 1px solid red; */
+}
+.descrption ul {
+    list-style-type: none;
+    line-height: 2;
+}
 
 h1, div{
     color: white;
@@ -32,7 +43,7 @@ h1, div{
     display: none;
     /* display: flex; */
     position: fixed;
-    top:9%;
+    top:8%;
     justify-content: center;
     align-items: center;
     /* border:1px solid red; */
