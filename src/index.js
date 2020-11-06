@@ -1,3 +1,4 @@
+import Ghost from "./ghost";
 import Monster from "./monster";
 import Player from"./player";
 import Shoot from "./shoot";
@@ -31,6 +32,7 @@ let animationId;
 let score = 0;
 let music;
 let level;
+let gameover;
 
 function initGame() {
     player = new Player(200,200)
@@ -44,6 +46,7 @@ function initGame() {
     scoreBox.innerHTML = score;
     music = true;
     level = 1;
+    gameover=false;
     // setTimeout(() => {
     //     spawnMonsters();
     // }, 0);
@@ -141,9 +144,10 @@ function animate(){
         const monsterToPlayer = Math.hypot(player.x - monster.x, player.y - monster.y);
         //end game
         if(monsterToPlayer - monster.radius - player.size< 1){
-            const gameover = new Audio("./src/audio/gameover.wav");
+            gameover = true;
+            const gameoverAudio = new Audio("./src/audio/gameover.wav");
             bgm.pause();
-            gameover.play();
+            gameoverAudio.play();
 
             cancelAnimationFrame(animationId);
             finalScore.innerHTML = score;
@@ -173,7 +177,12 @@ function spawnMonsters(){
     const lvOne = setInterval(()=>{
         let x;
         let y;
-        if(score >= 500){
+        setInterval(()=>{
+            if(gameover){
+                clearInterval(lvOne);
+            }
+        },100)
+        if(score >= 100){
             clearInterval(lvOne);
             secLevel();
         }
@@ -197,7 +206,61 @@ function secLevel(){
     const lvTwo = setInterval(()=>{
         let x;
         let y;
-        console.log("tongshi")
+        setInterval(()=>{
+            if(gameover){
+                clearInterval(lvTwo);
+            }
+        },100)
+        if(score >= 200){
+            clearInterval(lvTwo);
+            thridLevel();
+        }
+        if (Math.random() < 0.5){
+            x = Math.random() < 0.5 ? 150 : canvas.width - 150;
+            y = Math.random() < 0.5 ? 100 : canvas.height - 150;
+        }else{
+            x = Math.random() < 0.5 ? 150 : canvas.width - 150;
+            y = Math.random() < 0.5 ? 150 : canvas.height - 100;
+        }
+        const angle = Math.atan2(player.y - y, player.x - x)
+        const velocity = {
+        x: Math.cos(angle),
+        y: Math.sin(angle)
+        }
+        monsters.push(new Monster(x,y,velocity))
+    },3000)
+}
+function thridLevel(){
+    const lvTwo = setInterval(()=>{
+        let x;
+        let y;
+        setInterval(()=>{
+            if(gameover){
+                clearInterval(lvTwo);
+            }
+        },100)
+        if (Math.random() < 0.5){
+            x = Math.random() < 0.5 ? 150 : canvas.width - 150;
+            y = Math.random() < 0.5 ? 100 : canvas.height - 150;
+        }else{
+            x = Math.random() < 0.5 ? 150 : canvas.width - 150;
+            y = Math.random() < 0.5 ? 150 : canvas.height - 100;
+        }
+        const angle = Math.atan2(player.y - y, player.x - x)
+        const velocity = {
+        x: Math.cos(angle),
+        y: Math.sin(angle)
+        }
+        monsters.push(new Ghost(x,y,velocity))
+    },5000)
+    const lvThree=setInterval(()=>{
+        let x;
+        let y;
+        setInterval(()=>{
+            if(gameover){
+                clearInterval(lvThree);
+            }
+        },100)
         if (Math.random() < 0.5){
             x = Math.random() < 0.5 ? 150 : canvas.width - 150;
             y = Math.random() < 0.5 ? 100 : canvas.height - 150;
@@ -218,7 +281,7 @@ tryAgainBtn.addEventListener("click",()=>{
     bgm.play();
     initGame()
     startAnimating(30);
-    // spawnMonsters();
+    spawnMonsters();
     gameOverModal.style.display = "none";
 })
 startGame.addEventListener("click",(e)=>{

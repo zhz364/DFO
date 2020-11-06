@@ -27,8 +27,9 @@ export default class Ghost{
 
     update(ctx){
         this.draw(ctx)
-        this.x = this.x + this.velocity.x
-        this.y = this.y + this.velocity.y
+        // this.x = this.x + this.velocity.x
+        // this.y = this.y + this.velocity.y
+        
     }
 
     updateMosterLocation(player,ctx){
