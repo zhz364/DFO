@@ -93,7 +93,7 @@ button{
   
 button span{
     position: relative;
-    z-index: 2;
+    z-index: 10;
 }
   
 button:after{
@@ -105,7 +105,6 @@ button:after{
     height: 100%;
     background: #ff003b;
     transition: all .35s;
-    z-index: 1;
 }
 
 button:hover{
@@ -114,17 +113,16 @@ button:hover{
 
 button:hover:after{
     width: 100%;
+    z-index: 1;
 }
 
 .instruction{
     display: flex;
-    /* justify-content: center; */
     align-items: center;
     flex-direction: column;
 }
 .instruction span{
     position: relative;
-    z-index: 2;
 }
 
 .score-div{
