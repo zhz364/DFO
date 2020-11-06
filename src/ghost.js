@@ -9,12 +9,15 @@ export default class Ghost{
         this.frameX = 0;
         this.frameY = 0;
         this.speed = 1;
+        this.ghostShoots=[]
         
         this.draw = this.draw.bind(this);
         this.update = this.update.bind(this);
         this.updateMosterLocation = this.updateMosterLocation.bind(this);
         this.handleMonsterFrame = this.handleMonsterFrame.bind(this);
+        
     }
+    
     draw(ctx){
         // ctx.beginPath()
         // ctx.arc(this.x,this.y,this.radius,0,Math.PI*2,false)
@@ -23,6 +26,9 @@ export default class Ghost{
         const monster = new Image();
         monster.src = "./src/images/monster2.png";
         ctx.drawImage(monster,this.width * this.frameX, this.height* this.frameY, this.width, this.height, this.x,this.y,this.width, this.height);
+    }
+    shoot(){
+        
     }
 
     update(ctx){

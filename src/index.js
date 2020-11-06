@@ -25,8 +25,9 @@ let playerPict = new Image();
 playerPict.src = "./src/images/player1.png";
 let background = new Image();
 background.src = "./src/images/background.jpg"
-let shoots = []
-let monsters = []
+let shoots = [];
+let monsters = [];
+let ghostShoots = [];
 let fpsInterval, startTime, now, then, elapsed;
 let animationId;
 let score = 0;
@@ -138,10 +139,21 @@ function animate(){
     shoots.forEach((shoot)=>{
         shoot.update(ctx)
     })
+
+    // ghostShoots.forEach((shoot)=>{
+    //     shoot.update(ctx)
+    // })
     monsters.forEach((monster,idx1)=>{
         // monster.update(ctx);
         monster.updateMosterLocation(player,ctx)
         const monsterToPlayer = Math.hypot(player.x - monster.x, player.y - monster.y);
+        // console.log(monster.constructor)
+        if(monster.constructor === "Ghost"){
+            ghostBulet(monster)
+        }
+        ghostShoots.forEach((shoot)=>{
+            shoot.update(ctx)
+        })
         //end game
         if(monsterToPlayer - monster.radius - player.size< 1){
             gameover = true;
@@ -153,6 +165,9 @@ function animate(){
             finalScore.innerHTML = score;
             gameOverModal.style.display = "flex"
        }
+       // Ghost shoots
+        ghostShoots
+
         shoots.forEach((shoot,idx2)=>{
            const dist =  Math.hypot(shoot.x - monster.x,shoot.y - monster.y)
            if(dist - monster.radius - shoot.radius< 1 && shoot.bulletProof){
@@ -307,6 +322,20 @@ pauseBGM.addEventListener('click',(e)=>{
     }
 })
 
+function ghostBulet(ghost){
+    const angle = Math.atan2(player.y - ghost.y, player.x - ghost.x)
+    const velocity = {
+        x: Math.cos(angle) * 2,
+        y: Math.sin(angle) * 2
+    } 
+    
+    const fireball = new Audio("./src/audio/fireball.mp3")
+    fireball.play();
+    const temp = new Shoot(ghost.x +10,ghost.y+20, velocity, false)
+    temp.update(ctx)
+    ghostShoots.push(temp)
+    
+}
 // initGame()
 // startAnimating(30)
 // spawnMonsters()
