@@ -30,6 +30,7 @@ let fpsInterval, startTime, now, then, elapsed;
 let animationId;
 let score = 0;
 let music;
+let level;
 
 function initGame() {
     player = new Player(200,200)
@@ -42,6 +43,7 @@ function initGame() {
     score = 0
     scoreBox.innerHTML = score;
     music = true;
+    level = 1;
     // setTimeout(() => {
     //     spawnMonsters();
     // }, 0);
@@ -168,6 +170,29 @@ function animate(){
     })
 }
 function spawnMonsters(){
+
+    const lvOne = setInterval(()=>{
+        let x;
+        let y;
+
+        if(score > 500){
+            clearInterval(lvOne);
+        }
+        if (Math.random() < 0.5){
+            x = Math.random() < 0.5 ? 150 : canvas.width - 150;
+            y = Math.random() < 0.5 ? 100 : canvas.height - 150;
+        }else{
+            x = Math.random() < 0.5 ? 150 : canvas.width - 150;
+            y = Math.random() < 0.5 ? 150 : canvas.height - 100;
+        }
+        const angle = Math.atan2(player.y - y, player.x - x)
+        const velocity = {
+        x: Math.cos(angle),
+        y: Math.sin(angle)
+        }
+        monsters.push(new Monster(x,y,velocity))
+    },4000)
+
     setInterval(()=>{
         let x;
         let y;
@@ -184,7 +209,8 @@ function spawnMonsters(){
         y: Math.sin(angle)
         }
         monsters.push(new Monster(x,y,velocity))
-    },4000)
+    },2000)
+    
 }
 
 tryAgainBtn.addEventListener("click",()=>{
@@ -216,6 +242,7 @@ pauseBGM.addEventListener('click',(e)=>{
         pauseBGM.innerHTML="OFF"
     }
 })
+
 // initGame()
 // startAnimating(30)
 // spawnMonsters()
