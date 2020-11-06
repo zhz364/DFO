@@ -1,11 +1,11 @@
-export default class Monster{
+export default class Ghost{
     constructor(x,y,velocity){
         this.x = x;
         this.y = y;
         this.radius = 15;
         this.velocity = velocity
-        this.width = 33;
-        this.height = 32;
+        this.width = 35;
+        this.height = 45;
         this.frameX = 0;
         this.frameY = 0;
         this.speed = 1;
@@ -21,7 +21,7 @@ export default class Monster{
         // ctx.fillStyle = this.color;
         // ctx.fill();
         const monster = new Image();
-        monster.src = "./src/images/monster1.png";
+        monster.src = "./src/images/monster2.png";
         ctx.drawImage(monster,this.width * this.frameX, this.height* this.frameY, this.width, this.height, this.x,this.y,this.width, this.height);
     }
 
