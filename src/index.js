@@ -12,6 +12,7 @@ const gameStartModal = document.getElementById("start-modal")
 const finalScore = document.getElementById("game-over-score");
 const startGame = document.getElementById("start");
 const pauseBGM = document.getElementById("pause-bgm");
+const fireballCounts = document.getElementById("fireball-count")
 let bgm = new Audio("https://hicamp-seed.s3-us-west-1.amazonaws.com/Yoann13.flac");
 export default ctx;
 // ctx.beginPath();
@@ -92,6 +93,17 @@ canvas.addEventListener('click', function(e){
         fireball.play();
         shoots.push(new Shoot(player.x +10,player.y+20, velocity))
     }
+    setInterval(()=>{
+        let temp = 5 - shoots.length;
+        if(temp === 0){
+            fireballCounts.innerHTML = "0 RELOADING!"
+            fireballCounts.style.color = "red";
+        }else{
+            fireballCounts.innerHTML = 5 - shoots.length;
+            fireballCounts.style.color = "white";
+        }
+
+    },100)
 });
 
 // let fpsInterval, startTime, now, then, elapsed;

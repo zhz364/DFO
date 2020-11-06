@@ -9,11 +9,15 @@ body {
     /* border: 10px solid red; */
 }
 .game-div{
-    width: 100%;
-    height: 100%;
+    width: inherit;
+    height: inherit;
+    /* border: 1px solid green; */
 }
 .game{
     display: flex;
+    /* width: 40em; */
+    /* border: 1px solid red; */
+
 }
 canvas {
     background: black;
@@ -118,8 +122,9 @@ button:hover:after{
 
 .instruction{
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     flex-direction: column;
+    /* border:1px solid red; */
 }
 .instruction span{
     position: relative;
@@ -128,4 +133,15 @@ button:hover:after{
 .score-div{
     position: fixed;
     top:12%
+}
+.fireball{
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid red; */
+    margin-top: 5%;
+}
+.inner-fireball-div{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
