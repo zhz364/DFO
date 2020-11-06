@@ -41,6 +41,10 @@ function initGame() {
     score = 0
     scoreBox.innerHTML = score;
     music = true;
+    // setTimeout(() => {
+    //     spawnMonsters();
+    // }, 0);
+    
 }
 
 // ctx.onload = function() {
@@ -166,9 +170,9 @@ function spawnMonsters(){
         const velocity = {
         x: Math.cos(angle),
         y: Math.sin(angle)
-    }
+        }
         monsters.push(new Monster(x,y,velocity))
-    },3000)
+    },4000)
 }
 
 tryAgainBtn.addEventListener("click",()=>{
@@ -176,11 +180,11 @@ tryAgainBtn.addEventListener("click",()=>{
     bgm.play();
     initGame()
     startAnimating(30);
-    spawnMonsters();
+    // spawnMonsters();
     gameOverModal.style.display = "none";
 })
 startGame.addEventListener("click",(e)=>{
-    e.preventDefault();
+    // e.preventDefault();
     initGame()
     startAnimating(30);
     spawnMonsters();
