@@ -165,7 +165,7 @@ function animate(){
                 score +=100;
                 scoreBox.innerHTML = score; 
            }
-           if(shoot.x < 100 || shoot.y < 150 || shoot.x > 700 || shoot.y > 500){
+           if(shoot.x < 100 || shoot.y < 100 || shoot.x > 700 || shoot.y > 500){
                 setTimeout(()=>{
                     shoots.splice(idx2,1);
                 },0)
@@ -253,28 +253,28 @@ function thridLevel(){
         }
         monsters.push(new Ghost(x,y,velocity))
     },5000)
-    const lvThree=setInterval(()=>{
-        let x;
-        let y;
-        setInterval(()=>{
-            if(gameover){
-                clearInterval(lvThree);
-            }
-        },100)
-        if (Math.random() < 0.5){
-            x = Math.random() < 0.5 ? 150 : canvas.width - 150;
-            y = Math.random() < 0.5 ? 100 : canvas.height - 150;
-        }else{
-            x = Math.random() < 0.5 ? 150 : canvas.width - 150;
-            y = Math.random() < 0.5 ? 150 : canvas.height - 100;
-        }
-        const angle = Math.atan2(player.y - y, player.x - x)
-        const velocity = {
-        x: Math.cos(angle),
-        y: Math.sin(angle)
-        }
-        monsters.push(new Monster(x,y,velocity))
-    },2000)
+    // const lvThree=setInterval(()=>{
+    //     let x;
+    //     let y;
+    //     setInterval(()=>{
+    //         if(gameover){
+    //             clearInterval(lvThree);
+    //         }
+    //     },100)
+    //     if (Math.random() < 0.5){
+    //         x = Math.random() < 0.5 ? 150 : canvas.width - 150;
+    //         y = Math.random() < 0.5 ? 100 : canvas.height - 150;
+    //     }else{
+    //         x = Math.random() < 0.5 ? 150 : canvas.width - 150;
+    //         y = Math.random() < 0.5 ? 150 : canvas.height - 100;
+    //     }
+    //     const angle = Math.atan2(player.y - y, player.x - x)
+    //     const velocity = {
+    //     x: Math.cos(angle),
+    //     y: Math.sin(angle)
+    //     }
+    //     monsters.push(new Monster(x,y,velocity))
+    // },2000)
 }
 tryAgainBtn.addEventListener("click",()=>{
     bgm = new Audio("https://hicamp-seed.s3-us-west-1.amazonaws.com/Yoann13.flac");

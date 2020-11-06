@@ -2,7 +2,7 @@ export default class Ghost{
     constructor(x,y,velocity){
         this.x = x;
         this.y = y;
-        this.radius = 15;
+        this.radius = 19;
         this.velocity = velocity
         this.width = 35;
         this.height = 45;
@@ -29,7 +29,7 @@ export default class Ghost{
         this.draw(ctx)
         // this.x = this.x + this.velocity.x
         // this.y = this.y + this.velocity.y
-        
+
     }
 
     updateMosterLocation(player,ctx){
