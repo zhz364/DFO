@@ -165,7 +165,7 @@ function animate(){
                 score +=100;
                 scoreBox.innerHTML = score; 
            }
-           if(shoot.x < 100 || shoot.y < 100 || shoot.x > 700 || shoot.y > 500){
+           if(shoot.x < 100 || shoot.y < 100 || shoot.x > 700 || shoot.y > 550){
                 setTimeout(()=>{
                     shoots.splice(idx2,1);
                 },0)
