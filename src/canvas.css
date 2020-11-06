@@ -5,6 +5,8 @@ body {
     align-items: center;
     background: black;
     font-family: Frijole;
+    height: 40em;
+    /* border: 10px solid red; */
 }
 .game-div{
     width: 100%;
@@ -15,9 +17,12 @@ body {
 }
 canvas {
     background: black;
-    height:inherit;
-    width: inherit;
+    height:600px;
+    width: 800px;
     cursor: url("./images/Skull.ani"),default;
+    /* border: 1px solid red; */
+    margin-top: -2%;
+
 }
 
 h1, div{
@@ -48,6 +53,7 @@ h1, div{
 
 .start-game-div{
     display: flex;
+    /* display: none; */
     position: fixed;
     top:10%;
     justify-content: center;
@@ -56,4 +62,61 @@ h1, div{
     height: 600px;
     background-color: black;
    
+}
+button{
+    display: block;
+    width: 200px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 18px;
+    text-decoration: none;
+    color: #333;
+    letter-spacing: 2px;
+    text-align: center;
+    position: relative;
+    transition: all .35s;
+    font-family: Frijole;
+    align-items: center;
+    justify-content: center;
+}
+  
+button span{
+    position: relative;
+    z-index: 2;
+}
+  
+button:after{
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: #ff003b;
+    transition: all .35s;
+    z-index: 1;
+}
+
+button:hover{
+    color: #fff;
+}
+
+button:hover:after{
+    width: 100%;
+}
+
+.instruction{
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    flex-direction: column;
+}
+.instruction span{
+    position: relative;
+    z-index: 2;
+}
+
+.score-div{
+    position: fixed;
+    top:12%
 }

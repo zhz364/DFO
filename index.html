@@ -9,7 +9,7 @@
         <!-- <script src="./src/index.js"></script> -->
         <!-- <script src="src/index.js"></script> -->
         <link rel="stylesheet" type="text/css" href="./src/canvas.css"/>
-        <h1>Home page dfo</h1>
+        <h1>Dungeon of Fighter</h1>
         <!-- <img src="https://hicamp-seed.s3-us-west-1.amazonaws.com/campsite_white_mountains.jpg"></img> -->
         <!-- <img src="./src/player1.png"></img> -->
 
@@ -17,9 +17,9 @@
         
     </head>
     <body>
-        <div><span>Score:</span><span id="score"></span></div>
+        <div class="score-div"><span>Score:</span><span id="score"></span></div>
         <div id="start-modal" class="start-game-div">
-                 <button id="start">START GAME</button>       
+                 <button id="start"><span>START GAME</span></button>       
         </div> 
         <div class="game-div">
             <div class="game">
@@ -33,11 +33,11 @@
                     </ul>
                 </div> 
                 <canvas id="game" width="800" height="600"></canvas>
-                <div>
+                <div class="instruction">
                     <span>INSTRUCTION</span>
                     <div>
                         MUSIC
-                        <button class="bgm-btn" id="pause-bgm">ON</button>
+                        <button class="bgm-btn" id="pause-bgm"><span>ON</span></button>
                     </div>
                 </div>
             </div>
@@ -51,7 +51,7 @@
                     Score: <span id="game-over-score"></span>
                 </div>
                 <div>
-                    <button id="try_again_btn">Try Again</button>
+                    <button id="try_again_btn"><span>Try Again</span></button>
                 </div>
             </div>
         </div>
