@@ -170,13 +170,12 @@ function animate(){
     })
 }
 function spawnMonsters(){
-
     const lvOne = setInterval(()=>{
         let x;
         let y;
-
-        if(score > 500){
+        if(score >= 500){
             clearInterval(lvOne);
+            secLevel();
         }
         if (Math.random() < 0.5){
             x = Math.random() < 0.5 ? 150 : canvas.width - 150;
@@ -192,10 +191,13 @@ function spawnMonsters(){
         }
         monsters.push(new Monster(x,y,velocity))
     },4000)
+}
 
-    setInterval(()=>{
+function secLevel(){
+    const lvTwo = setInterval(()=>{
         let x;
         let y;
+        console.log("tongshi")
         if (Math.random() < 0.5){
             x = Math.random() < 0.5 ? 150 : canvas.width - 150;
             y = Math.random() < 0.5 ? 100 : canvas.height - 150;
@@ -210,9 +212,7 @@ function spawnMonsters(){
         }
         monsters.push(new Monster(x,y,velocity))
     },2000)
-    
 }
-
 tryAgainBtn.addEventListener("click",()=>{
     bgm = new Audio("https://hicamp-seed.s3-us-west-1.amazonaws.com/Yoann13.flac");
     bgm.play();
@@ -227,6 +227,7 @@ startGame.addEventListener("click",(e)=>{
     startAnimating(30);
     spawnMonsters();
     gameStartModal.style.display = "none";
+    pauseBGM.innerHTML = "OFF"
     bgm.play();
 })
 
