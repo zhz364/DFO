@@ -93,7 +93,7 @@ canvas.addEventListener('click', function(e){
     if(shoots.length < 5){
         const fireball = new Audio("./src/audio/fireball.mp3")
         fireball.play();
-        shoots.push(new Shoot(player.x +10,player.y+20, velocity))
+        shoots.push(new Shoot(player.x +10,player.y+20, velocity, true))
     }
     setInterval(()=>{
         let temp = 5 - shoots.length;

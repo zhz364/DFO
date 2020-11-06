@@ -1,6 +1,6 @@
 // import {ctx} from "./index.js"
 export default class Shoot{
-    constructor(x,y,velocity){
+    constructor(x,y,velocity,bulletProof){
         this.x = x;
         this.y = y;
         this.radius = 10;
@@ -9,6 +9,7 @@ export default class Shoot{
         this.width = 20;
         this.height = 20;
         this.draw = this.draw.bind(this)
+        this.bulletProof = bulletProof
     }
     draw(ctx){
         const fireball = new Image();
@@ -30,8 +31,3 @@ export default class Shoot{
         }
     }
 }
-
-// window.addEventListener('click', function(e){
-//     const shoot = new Shoot(event.clientX,event.clientY)
-//     shoot.draw()
-// });
