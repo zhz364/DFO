@@ -151,7 +151,7 @@ function animate(){
        }
         shoots.forEach((shoot,idx2)=>{
            const dist =  Math.hypot(shoot.x - monster.x,shoot.y - monster.y)
-           if(dist - monster.radius - shoot.radius< 1){
+           if(dist - monster.radius - shoot.radius< 1 && shoot.bulletProof){
                 const dead = new Audio("./src/audio/dead.mp3");
                 dead.play();
                 setTimeout(()=>{
