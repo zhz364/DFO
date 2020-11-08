@@ -172,7 +172,7 @@ function animate(){
             // monster.ghostBulet(player);
             // monster.shoot(ctx);
             testing(monster);
-            monster.shoot(ctx);
+            monster.shoot(ctx,player,gameover,animationId,score,gameOverModal,bgm,finalScore);
         }
 
         //end game

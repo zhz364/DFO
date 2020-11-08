@@ -2,6 +2,7 @@ export default class Player {
     constructor(x,y){
         this.x = x;
         this.y = y;
+        this.radius = 20;
         this.width = 32;
         this.height = 52;
         this.frameX = 0;

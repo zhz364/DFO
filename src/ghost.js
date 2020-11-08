@@ -16,7 +16,8 @@ export default class Ghost{
         this.update = this.update.bind(this);
         this.updateMosterLocation = this.updateMosterLocation.bind(this);
         this.handleMonsterFrame = this.handleMonsterFrame.bind(this);
-        this.shoot = this.shoot.bind(this)
+        this.shoot = this.shoot.bind(this);
+        this.shootCheck = this.shootCheck.bind(this);
         
     }
     
@@ -44,18 +45,38 @@ export default class Ghost{
         // this.shoot(ctx)
         // },5000)
     }
-    shoot(ctx){
+    shoot(ctx,player,gameover,animationId,score,gameOverModal,bgm,finalScore){
         // if( this.ghostShoots.length > 0){
         //     this.ghostShoots.pop().update(ctx)
         //     // const fireball = new Audio("./src/audio/fireball.mp3")
         //     // fireball.play();
         // }
-        this.ghostShoots.forEach((shoot)=>{
-            // setInterval(()=>{
-            //     shoot.update(ctx)
-            // },50000)
-            shoot.update(ctx)
+        this.ghostShoots.forEach((shoot,idx)=>{
+            shoot.update(ctx);
+            this.shootCheck(player,shoot,idx,gameover,animationId,score,gameOverModal,bgm,finalScore);
         })
+    }
+    shootCheck(player,shoot,idx,gameover,animationId,score,gameOverModal,bgm,finalScore){
+        const dist = Math.hypot(player.x - shoot.x, player.y - shoot.y)
+        console.log(dist - player.radius - shoot.radius)
+        if(dist - player.radius - shoot.radius < 1){
+            setTimeout(()=>{
+                this.ghostShoots.splice(idx,1);
+            },0)
+            gameover = true;
+            const gameoverAudio = new Audio("./src/audio/gameover.wav");
+            bgm.pause();
+            gameoverAudio.play();
+
+            cancelAnimationFrame(animationId);
+            finalScore.innerHTML = score;
+            gameOverModal.style.display = "flex"
+        }
+        if(shoot.x < 100 || shoot.y < 100 || shoot.x > 700 || shoot.y > 550){
+            setTimeout(()=>{
+                this.ghostShoots.splice(idx,1);
+            },0)
+        }
     }
 
     update(ctx){
