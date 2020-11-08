@@ -39,6 +39,12 @@ canvas {
     list-style-type: none;
     line-height: 2;
 }
+.descrption-span{
+    display: flex;
+    width: 15em;
+    border-top: 3px solid red;
+    margin-top: 3%;
+}
 
 h1, div{
     color: white;
