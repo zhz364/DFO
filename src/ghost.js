@@ -1,3 +1,4 @@
+import Shoot from "./shoot"
 export default class Ghost{
     constructor(x,y,velocity){
         this.x = x;
@@ -15,6 +16,7 @@ export default class Ghost{
         this.update = this.update.bind(this);
         this.updateMosterLocation = this.updateMosterLocation.bind(this);
         this.handleMonsterFrame = this.handleMonsterFrame.bind(this);
+        this.shoot = this.shoot.bind(this)
         
     }
     
@@ -27,8 +29,33 @@ export default class Ghost{
         monster.src = "./src/images/monster2.png";
         ctx.drawImage(monster,this.width * this.frameX, this.height* this.frameY, this.width, this.height, this.x,this.y,this.width, this.height);
     }
-    shoot(){
-        
+    ghostBulet(player,ctx){
+        // setInterval(()=>{
+            const angle = Math.atan2(player.y - this.y, player.x - this.x)
+            const velocity = {
+                x: Math.cos(angle),
+                y: Math.sin(angle)
+            } 
+            // for(let i = 0; i < 5;i++){
+                const temp = new Shoot(this.x +10,this.y+20, velocity, false)
+                this.ghostShoots.push(temp);
+                // temp.update(ctx)
+            // }
+        // this.shoot(ctx)
+        // },5000)
+    }
+    shoot(ctx){
+        // if( this.ghostShoots.length > 0){
+        //     this.ghostShoots.pop().update(ctx)
+        //     // const fireball = new Audio("./src/audio/fireball.mp3")
+        //     // fireball.play();
+        // }
+        this.ghostShoots.forEach((shoot)=>{
+            // setInterval(()=>{
+            //     shoot.update(ctx)
+            // },50000)
+            shoot.update(ctx)
+        })
     }
 
     update(ctx){

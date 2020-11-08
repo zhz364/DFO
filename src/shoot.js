@@ -21,8 +21,8 @@ export default class Shoot{
         this.draw(ctx)
         this.x = this.x + this.velocity.x
         this.y = this.y + this.velocity.y
-
     }
+    
     fireballCounts(el,shoots){
         for(let i = 0; i < shoots.length; i++){
             const fireball = new Image();

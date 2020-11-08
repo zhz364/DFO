@@ -89,16 +89,18 @@ function getMousePos(canvas, e) {
 canvas.addEventListener('click', function(e){
     const pos = getMousePos(canvas, e)
     const angle = Math.atan2(pos.y - player.y, pos.x - player.x)
-    // console.log(angle)
+
     const velocity = {
         x: Math.cos(angle) * 3,
         y: Math.sin(angle) * 3
     } 
+
     if(shoots.length < 5){
         const fireball = new Audio("./src/audio/fireball.mp3")
         fireball.play();
         shoots.push(new Shoot(player.x +10,player.y+20, velocity, true))
     }
+
     setInterval(()=>{
         let temp = 5 - shoots.length;
         if(temp === 0){
@@ -108,9 +110,31 @@ canvas.addEventListener('click', function(e){
             fireballCounts.innerHTML = 5 - shoots.length;
             fireballCounts.style.color = "white";
         }
-
     },100)
+
 });
+
+const throttle = (func, limit) => {
+    let inThrottle
+    return function() {
+      const args = arguments
+      const context = this
+      if (!inThrottle) {
+        func.apply(context, args)
+        inThrottle = true
+        setTimeout(() => inThrottle = false, limit)
+      }
+    }
+}
+
+function test(monster){
+    console.log("Cool")
+    monster.ghostBulet(player);
+    // monster.shoot(ctx);
+}
+// test()
+
+let testing = throttle(test,5000)
 
 // let fpsInterval, startTime, now, then, elapsed;
 
@@ -124,7 +148,6 @@ function startAnimating(fps){
 
 function animate(){
     animationId = requestAnimationFrame(animate);
-    // ctx.clearRect(0,0, canvas.clientWidth, canvas.height);
     now = Date.now();
     elapsed = now - then;
     if(elapsed > fpsInterval){
@@ -135,25 +158,23 @@ function animate(){
         player.movePlayer();
         player.handlePlayerFrame();
     }
+    // testing()
 
     shoots.forEach((shoot)=>{
         shoot.update(ctx)
     })
 
-    // ghostShoots.forEach((shoot)=>{
-    //     shoot.update(ctx)
-    // })
     monsters.forEach((monster,idx1)=>{
-        // monster.update(ctx);
         monster.updateMosterLocation(player,ctx)
         const monsterToPlayer = Math.hypot(player.x - monster.x, player.y - monster.y);
-        // console.log(monster.constructor)
-        if(monster.constructor === "Ghost"){
-            ghostBulet(monster)
+        
+        if(monster instanceof Ghost){
+            // monster.ghostBulet(player);
+            // monster.shoot(ctx);
+            testing(monster);
+            monster.shoot(ctx);
         }
-        ghostShoots.forEach((shoot)=>{
-            shoot.update(ctx)
-        })
+
         //end game
         if(monsterToPlayer - monster.radius - player.size< 1){
             gameover = true;
@@ -166,7 +187,7 @@ function animate(){
             gameOverModal.style.display = "flex"
        }
        // Ghost shoots
-        ghostShoots
+        // ghostShoots
 
         shoots.forEach((shoot,idx2)=>{
            const dist =  Math.hypot(shoot.x - monster.x,shoot.y - monster.y)
@@ -322,20 +343,6 @@ pauseBGM.addEventListener('click',(e)=>{
     }
 })
 
-function ghostBulet(ghost){
-    const angle = Math.atan2(player.y - ghost.y, player.x - ghost.x)
-    const velocity = {
-        x: Math.cos(angle) * 2,
-        y: Math.sin(angle) * 2
-    } 
-    
-    const fireball = new Audio("./src/audio/fireball.mp3")
-    fireball.play();
-    const temp = new Shoot(ghost.x +10,ghost.y+20, velocity, false)
-    temp.update(ctx)
-    ghostShoots.push(temp)
-    
-}
 // initGame()
 // startAnimating(30)
 // spawnMonsters()
