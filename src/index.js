@@ -34,6 +34,9 @@ let score = 0;
 let music;
 let level;
 let gameover;
+let lvOne;
+let lvTwo;
+let lvThree;
 
 function initGame() {
     player = new Player(canvas.width/2,canvas.height/2)
@@ -48,6 +51,9 @@ function initGame() {
     music = true;
     level = 1;
     gameover=false;
+    clearInterval(lvOne);
+    clearInterval(lvTwo);
+    clearInterval(lvThree);
     // setTimeout(() => {
     //     spawnMonsters();
     // }, 0);
@@ -173,6 +179,9 @@ function animate(){
             // monster.shoot(ctx);
             testing(monster);
             monster.shoot(ctx,player,gameover,animationId,score,gameOverModal,bgm,finalScore);
+            // console.log(gameover)
+            
+
         }
 
         //end game
@@ -210,14 +219,14 @@ function animate(){
     })
 }
 function spawnMonsters(){
-    const lvOne = setInterval(()=>{
+    lvOne = setInterval(()=>{
         let x;
         let y;
-        setInterval(()=>{
-            if(gameover){
-                clearInterval(lvOne);
-            }
-        },100)
+        // setInterval(()=>{
+        //     if(gameover){
+        //         clearInterval(lvOne);
+        //     }
+        // },100)
         if(score >= 100){
             clearInterval(lvOne);
             secLevel();
@@ -239,14 +248,14 @@ function spawnMonsters(){
 }
 
 function secLevel(){
-    const lvTwo = setInterval(()=>{
+    lvTwo = setInterval(()=>{
         let x;
         let y;
-        setInterval(()=>{
-            if(gameover){
-                clearInterval(lvTwo);
-            }
-        },100)
+        // setInterval(()=>{
+        //     if(gameover){
+        //         clearInterval(lvTwo);
+        //     }
+        // },100)
         if(score >= 200){
             clearInterval(lvTwo);
             thridLevel();
@@ -267,14 +276,15 @@ function secLevel(){
     },3000)
 }
 function thridLevel(){
-    const lvTwo = setInterval(()=>{
+    lvThree = setInterval(()=>{
         let x;
         let y;
-        setInterval(()=>{
-            if(gameover){
-                clearInterval(lvTwo);
-            }
-        },100)
+        // setInterval(()=>{
+        //     if(gameover){
+                
+        //         clearInterval(lvTwo);
+        //     }
+        // },100)
         if (Math.random() < 0.5){
             x = Math.random() < 0.5 ? 150 : canvas.width - 150;
             y = Math.random() < 0.5 ? 100 : canvas.height - 150;

@@ -58,7 +58,7 @@ export default class Ghost{
     }
     shootCheck(player,shoot,idx,gameover,animationId,score,gameOverModal,bgm,finalScore){
         const dist = Math.hypot(player.x - shoot.x, player.y - shoot.y)
-        console.log(dist - player.radius - shoot.radius)
+        // console.log(dist - player.radius - shoot.radius)
         if(dist - player.radius - shoot.radius < 1){
             setTimeout(()=>{
                 this.ghostShoots.splice(idx,1);
@@ -72,6 +72,7 @@ export default class Ghost{
             finalScore.innerHTML = score;
             gameOverModal.style.display = "flex"
         }
+        // console.log(gameover)
         if(shoot.x < 100 || shoot.y < 100 || shoot.x > 700 || shoot.y > 550){
             setTimeout(()=>{
                 this.ghostShoots.splice(idx,1);
