@@ -36,7 +36,7 @@ let level;
 let gameover;
 
 function initGame() {
-    player = new Player(200,200)
+    player = new Player(canvas.width/2,canvas.height/2)
     playerPict = new Image();
     playerPict.src = "./src/images/player1.png";
     background = new Image();
