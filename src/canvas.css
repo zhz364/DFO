@@ -4,7 +4,7 @@ body {
     flex-direction: column;
     align-items: center;
     background: black;
-    font-family: Frijole;
+    font-family: 'Frijole', cursive;
     height: 40em;
     /* border: 10px solid red; */
 }
@@ -97,7 +97,7 @@ button{
     text-align: center;
     position: relative;
     transition: all .35s;
-    font-family: Frijole;
+    font-family: 'Frijole', cursive;
     align-items: center;
     justify-content: center;
 }
