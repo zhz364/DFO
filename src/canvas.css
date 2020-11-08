@@ -41,6 +41,7 @@ canvas {
 }
 .descrption-span{
     display: flex;
+    align-items: center;
     width: 15em;
     border-top: 3px solid red;
     margin-top: 3%;
