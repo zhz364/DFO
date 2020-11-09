@@ -227,7 +227,7 @@ function spawnMonsters(){
         //         clearInterval(lvOne);
         //     }
         // },100)
-        if(score >= 100){
+        if(score >= 500){
             clearInterval(lvOne);
             secLevel();
         }
@@ -256,7 +256,7 @@ function secLevel(){
         //         clearInterval(lvTwo);
         //     }
         // },100)
-        if(score >= 200){
+        if(score >= 1200){
             clearInterval(lvTwo);
             thridLevel();
         }
@@ -279,12 +279,6 @@ function thridLevel(){
     lvThree = setInterval(()=>{
         let x;
         let y;
-        // setInterval(()=>{
-        //     if(gameover){
-                
-        //         clearInterval(lvTwo);
-        //     }
-        // },100)
         if (Math.random() < 0.5){
             x = Math.random() < 0.5 ? 150 : canvas.width - 150;
             y = Math.random() < 0.5 ? 100 : canvas.height - 150;
