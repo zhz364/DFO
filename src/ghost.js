@@ -3,7 +3,7 @@ export default class Ghost{
     constructor(x,y,velocity){
         this.x = x;
         this.y = y;
-        this.radius = 19;
+        this.radius = 20;
         this.velocity = velocity
         this.width = 35;
         this.height = 45;
