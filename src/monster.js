@@ -2,7 +2,7 @@ export default class Monster{
     constructor(x,y,velocity){
         this.x = x;
         this.y = y;
-        this.radius = 15;
+        this.radius = 20;
         this.velocity = velocity
         this.width = 33;
         this.height = 32;
