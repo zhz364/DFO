@@ -273,7 +273,7 @@ function secLevel(){
         y: Math.sin(angle)
         }
         monsters.push(new Monster(x,y,velocity))
-    },3000)
+    },2000)
 }
 function thridLevel(){
     lvThree = setInterval(()=>{
@@ -298,7 +298,7 @@ function thridLevel(){
         y: Math.sin(angle)
         }
         monsters.push(new Ghost(x,y,velocity))
-    },5000)
+    },10000)
 
     lvTwo=setInterval(()=>{
         let x;

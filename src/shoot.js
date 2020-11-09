@@ -13,7 +13,11 @@ export default class Shoot{
     }
     draw(ctx){
         const fireball = new Image();
-        fireball.src = "./src/images/fireball1.png";
+        if(this.bulletProof){
+            fireball.src = "./src/images/fireball1.png";
+        }else{
+            fireball.src = "./src/images/2.png";
+        }
         ctx.drawImage(fireball,this.x,this.y,this.width,this.height);
     }
 
@@ -22,7 +26,7 @@ export default class Shoot{
         this.x = this.x + this.velocity.x
         this.y = this.y + this.velocity.y
     }
-    
+
     fireballCounts(el,shoots){
         for(let i = 0; i < shoots.length; i++){
             const fireball = new Image();
