@@ -1,5 +1,5 @@
 # DFO
-<p align="center"><img width="450" height="90" src="https://hicamp-seed.s3-us-west-1.amazonaws.com/hicamp2.PNG"></p>
+<p align="center"><img width="450" height="90" src="./src/images/dfo-logo.png"></p>
 Dungeon style 2d shooter Battle Royale type of web game.
 
 ###  1. User Movement (1 Days 11/02/2020)
