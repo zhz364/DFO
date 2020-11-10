@@ -1,4 +1,4 @@
-# DFO
+# Dungeon of Fighter
 <p align="center"><img width="450" height="90" src="./src/images/dfo-logo.PNG"></p>
 Dungeon style 2d shooter Battle Royale type of web game.
 
