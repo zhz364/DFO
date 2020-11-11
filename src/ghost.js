@@ -1,6 +1,6 @@
 import Shoot from "./shoot"
 export default class Ghost{
-    constructor(x,y,velocity){
+    constructor(x,y,velocity,player){
         this.x = x;
         this.y = y;
         this.radius = 20;
@@ -10,55 +10,45 @@ export default class Ghost{
         this.frameX = 0;
         this.frameY = 0;
         this.speed = 1;
-        this.ghostShoots=[]
+        this.ghostShoots=[];
+        this.player = player
         
         this.draw = this.draw.bind(this);
-        this.update = this.update.bind(this);
-        this.updateMosterLocation = this.updateMosterLocation.bind(this);
-        this.handleMonsterFrame = this.handleMonsterFrame.bind(this);
+        this.updateMonsterLocation = this.updateMonsterLocation.bind(this);
+        this.handleMonsterFrame = this.handleMonsterFrame.bind(this);   
         this.shoot = this.shoot.bind(this);
         this.shootCheck = this.shootCheck.bind(this);
-        
+        this.ghostBulet = this.ghostBulet.bind(this)
+        this.intervalId = setInterval(() => {
+            this.ghostBulet()
+        }, 5000);
     }
     
     draw(ctx){
-        // ctx.beginPath()
-        // ctx.arc(this.x,this.y,this.radius,0,Math.PI*2,false)
-        // ctx.fillStyle = this.color;
-        // ctx.fill();
         const monster = new Image();
         monster.src = "./src/images/monster2.png";
         ctx.drawImage(monster,this.width * this.frameX, this.height* this.frameY, this.width, this.height, this.x,this.y,this.width, this.height);
     }
-    ghostBulet(player,ctx){
-        // setInterval(()=>{
-            const angle = Math.atan2(player.y - this.y, player.x - this.x)
-            const velocity = {
-                x: Math.cos(angle),
-                y: Math.sin(angle)
-            } 
-            // for(let i = 0; i < 5;i++){
-                const temp = new Shoot(this.x +10,this.y+20, velocity, false)
-                this.ghostShoots.push(temp);
-                // temp.update(ctx)
-            // }
-        // this.shoot(ctx)
-        // },5000)
+
+    ghostBulet(){
+        const angle = Math.atan2(this.player.y - this.y, this.player.x - this.x)
+        const velocity = {
+            x: Math.cos(angle),
+            y: Math.sin(angle)
+        } 
+        const temp = new Shoot(this.x +10,this.y+20, velocity, false)
+        this.ghostShoots.push(temp);
     }
+
     shoot(ctx,player,gameover,animationId,score,gameOverModal,bgm,finalScore){
-        // if( this.ghostShoots.length > 0){
-        //     this.ghostShoots.pop().update(ctx)
-        //     // const fireball = new Audio("./src/audio/fireball.mp3")
-        //     // fireball.play();
-        // }
         this.ghostShoots.forEach((shoot,idx)=>{
             shoot.update(ctx);
             this.shootCheck(player,shoot,idx,gameover,animationId,score,gameOverModal,bgm,finalScore);
         })
     }
+
     shootCheck(player,shoot,idx,gameover,animationId,score,gameOverModal,bgm,finalScore){
         const dist = Math.hypot(player.x - shoot.x, player.y - shoot.y)
-        // console.log(dist - player.radius - shoot.radius)
         if(dist - player.radius - shoot.radius < 1){
             setTimeout(()=>{
                 this.ghostShoots.splice(idx,1);
@@ -72,7 +62,6 @@ export default class Ghost{
             finalScore.innerHTML = score;
             gameOverModal.style.display = "flex"
         }
-        // console.log(gameover)
         if(shoot.x < 100 || shoot.y < 100 || shoot.x > 700 || shoot.y > 550){
             setTimeout(()=>{
                 this.ghostShoots.splice(idx,1);
@@ -80,14 +69,7 @@ export default class Ghost{
         }
     }
 
-    update(ctx){
-        this.draw(ctx)
-        // this.x = this.x + this.velocity.x
-        // this.y = this.y + this.velocity.y
-
-    }
-
-    updateMosterLocation(player,ctx){
+    updateMonsterLocation(player,ctx){
         const angle = Math.atan2(player.y - this.y, player.x - this.x)
         const velocities = {
             x: Math.cos(angle),
@@ -120,10 +102,10 @@ export default class Ghost{
                 this.frameY = 0;
             }
         }
-        // this.frameY = player.frameY;
         this.handleMonsterFrame();
-        this.update(ctx);
+        this.draw(ctx);
     }
+
     handleMonsterFrame(){
         if (this.frameX < 3){
             this.frameX++;
@@ -132,4 +114,7 @@ export default class Ghost{
         }
     }
 
+    clear(){
+        clearInterval(this.intervalId);
+    }
 }

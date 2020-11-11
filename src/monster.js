@@ -12,7 +12,7 @@ export default class Monster{
         
         this.draw = this.draw.bind(this);
         this.update = this.update.bind(this);
-        this.updateMosterLocation = this.updateMosterLocation.bind(this);
+        this.updateMonsterLocation = this.updateMonsterLocation.bind(this);
         this.handleMonsterFrame = this.handleMonsterFrame.bind(this);
     }
     draw(ctx){
@@ -31,7 +31,7 @@ export default class Monster{
         this.y = this.y + this.velocity.y
     }
 
-    updateMosterLocation(player,ctx){
+    updateMonsterLocation(player,ctx){
         const angle = Math.atan2(player.y - this.y, player.x - this.x)
         const velocities = {
             x: Math.cos(angle),

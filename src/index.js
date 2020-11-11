@@ -15,10 +15,8 @@ const startGame = document.getElementById("start");
 const pauseBGM = document.getElementById("pause-bgm");
 const fireballCounts = document.getElementById("fireball-count")
 let bgm = new Audio("https://hicamp-seed.s3-us-west-1.amazonaws.com/Yoann13.flac");
+
 export default ctx;
-// ctx.beginPath();
-// ctx.arc(100, 75, 50, 0, 2 * Math.PI);
-// ctx.stroke();
 
 let player = new Player(200,200)
 let playerPict = new Image();
@@ -54,15 +52,9 @@ function initGame() {
     clearInterval(lvOne);
     clearInterval(lvTwo);
     clearInterval(lvThree);
-    // setTimeout(() => {
-    //     spawnMonsters();
-    // }, 0);
-    
 }
 
-// ctx.onload = function() {
-//     ctx.drawImage(playerPict,100,10,player.width,player.height);
-// }
+
 function drawPlayer(img,sX, sY, sW, sH, dX, dY, dW, dH) {
     ctx.drawImage(img,sX, sY, sW, sH, dX, dY, dW, dH);
 }
@@ -73,7 +65,6 @@ window.addEventListener("keydown", function (e) {
         player.keys[e.keyCode] = true;
         player.moving = true;
     }
-    // console.log(player.keys)
 })
 
 window.addEventListener("keyup", function (e) {
@@ -133,16 +124,12 @@ const throttle = (func, limit) => {
     }
 }
 
-function test(monster){
-    // console.log("Cool")
-    monster.ghostBulet(player);
-    // monster.shoot(ctx);
-}
+// function test(monster){
+//     monster.ghostBulet(player);
+// }
 // test()
 
-let testing = throttle(test,5000)
-
-// let fpsInterval, startTime, now, then, elapsed;
+// let testing = throttle(test,2000)
 
 
 function startAnimating(fps){
@@ -164,24 +151,18 @@ function animate(){
         player.movePlayer();
         player.handlePlayerFrame();
     }
-    // testing()
 
     shoots.forEach((shoot)=>{
         shoot.update(ctx)
     })
 
     monsters.forEach((monster,idx1)=>{
-        monster.updateMosterLocation(player,ctx)
+
+        monster.updateMonsterLocation(player,ctx)
         const monsterToPlayer = Math.hypot(player.x - monster.x, player.y - monster.y);
         
         if(monster instanceof Ghost){
-            // monster.ghostBulet(player);
-            // monster.shoot(ctx);
-            testing(monster);
             monster.shoot(ctx,player,gameover,animationId,score,gameOverModal,bgm,finalScore);
-            // console.log(gameover)
-            
-
         }
 
         //end game
@@ -195,12 +176,13 @@ function animate(){
             finalScore.innerHTML = score;
             gameOverModal.style.display = "flex"
        }
-       // Ghost shoots
-        // ghostShoots
 
         shoots.forEach((shoot,idx2)=>{
            const dist =  Math.hypot(shoot.x - monster.x,shoot.y - monster.y)
-           if(dist - monster.radius - shoot.radius< 1 && shoot.bulletProof){
+           if(dist - monster.radius - shoot.radius < 1 && shoot.bulletProof){
+                if(monster instanceof Ghost){
+                    monster.clear();
+                }
                 const dead = new Audio("./src/audio/dead.mp3");
                 dead.play();
                 setTimeout(()=>{
@@ -251,12 +233,12 @@ function secLevel(){
     lvTwo = setInterval(()=>{
         let x;
         let y;
-        // setInterval(()=>{
-        //     if(gameover){
-        //         clearInterval(lvTwo);
-        //     }
-        // },100)
-        if(score >= 1200){
+        setInterval(()=>{
+            if(gameover){
+                clearInterval(lvTwo);
+            }
+        },100)
+        if(score >= 1000){
             clearInterval(lvTwo);
             thridLevel();
         }
@@ -291,8 +273,8 @@ function thridLevel(){
         x: Math.cos(angle),
         y: Math.sin(angle)
         }
-        monsters.push(new Ghost(x,y,velocity))
-    },10000)
+        monsters.push(new Ghost(x,y,velocity,player))
+    },5000)
 
     lvTwo=setInterval(()=>{
         let x;
@@ -343,7 +325,3 @@ pauseBGM.addEventListener('click',(e)=>{
         pauseBGM.innerHTML="OFF"
     }
 })
-
-// initGame()
-// startAnimating(30)
-// spawnMonsters()
