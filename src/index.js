@@ -297,6 +297,7 @@ function thridLevel(){
 }
 tryAgainBtn.addEventListener("click",()=>{
     bgm = new Audio("https://hicamp-seed.s3-us-west-1.amazonaws.com/Yoann13.flac");
+    bgm.loop = true;
     bgm.play();
     initGame()
     startAnimating(30);
@@ -311,6 +312,8 @@ startGame.addEventListener("click",(e)=>{
     gameStartModal.style.display = "none";
     pauseBGM.innerHTML = "OFF"
     bgm.play();
+    bgm.loop = true;
+    
 })
 
 pauseBGM.addEventListener('click',(e)=>{
