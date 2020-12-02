@@ -152,3 +152,11 @@ button:hover:after{
     align-items: center;
     justify-content: space-around;
 }
+.about-about{
+    display: flex;
+    justify-content: space-between;
+}
+a{
+    outline-style: none;
+    text-decoration: none;
+}
