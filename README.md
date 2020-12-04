@@ -21,6 +21,7 @@ The player can control the character by pressing the "w", "a", "s", and "d" keys
 <div>
     <img width="75%" src="https://hicamp-seed.s3-us-west-1.amazonaws.com/playerOperation.gif">
 </div>
+
 ### Monster Attack
 Normal skeleton monsters are meant to hit the player and deal damage, while ghost monsters shoot ghost fire to kill the player. If your body touches the Ghost, you will be killed by it as well!
 
