@@ -30,7 +30,7 @@ Normal skeleton monsters are meant to hit the player and deal damage, while ghos
 </div>
 
 ### Difficulty Upgrade
-When the player kills a monster, he will be rewarded with 100 points. When the points reach 500, the game will automatically upgrade the difficulty from easy to medium, and the generation speed of the skeleton monster will be greatly increased. When the player reaches 1200 points, ghost monsters will join the battlefield.
+When the player kills a monster, you will be rewarded with 100 points. When the points reach 500, the game will automatically upgrade the difficulty from easy to medium, and the generation speed of the skeleton monster will be greatly increased. When the player reaches 1200 points, ghost monsters will join the battlefield.
 
 ## Future
 In the future, I will add more types of monsters to increase the difficulty. Also, a scoreboard system will be introduced so that players can put their names on the scoreboard to show their bravery.
